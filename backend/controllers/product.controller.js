@@ -1,4 +1,4 @@
-import Product from '../models/Product.js';
+import Product from '../models/product.model.js';
 import mongoose from 'mongoose';
 
 export const getProducts = async (req, res) => {
@@ -13,13 +13,10 @@ export const getProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   const product = req.body;
-
   if(!product.name || !product.price || !product.image) {
     return res.status(400).json({ success:false, message: "Please provide name, price and image" });
   }
-
   const newProduct = new Product(product)
-
   try {
     await newProduct.save();
     res.status(201).json({ success: true, data: newProduct });
@@ -32,7 +29,6 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   const product = req.body;
-
   try {
     const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true });
 
@@ -48,7 +44,6 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct =  async (req, res) => {
   const { id } = req.params;
   console.log("id:", id);
-  
   try {
     const deletedProduct = await Product.findByIdAndDelete(id);
     if (!deletedProduct) {

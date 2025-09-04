@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import Product from '../models/Product.js';
-import mongoose from 'mongoose';
+
 import { getProducts, createProduct, updateProduct, deleteProduct } from '../controllers/product.controller.js';
 
 const router = express.Router();
